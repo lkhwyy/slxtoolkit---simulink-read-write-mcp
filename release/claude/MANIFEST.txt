@@ -2,16 +2,16 @@ slxtoolkit 交付清单
 ============================================================
 宿主：Claude Code
 target：claude
-版本：1.2.6
-BuildId：b414d2604eff4aec9405f555cf7722fe
-构建日期：2026-11-02
-源插件 HEAD：3f898d63fc9417dfa5fecd89945f4fdb94169b80
+版本：1.2.21
+BuildId：62478f6a085e4902963d0100110d70b1
+构建日期：2026-11-10
+源插件 HEAD：e39ec4f11e90ac4ec2608b540b6bc3db0faa4051
 源工作树有改动：False
-有效期：2026-11-02 至 2027-01-02（含当日，2 个月）
+有效期：2026-11-10 至 2027-01-10（含当日，2 个月）
 代码签名：未签名
-打包日期：2026-11-02
+打包日期：2026-11-10
 
 发货方式：把本目录整个发给收件人
 ------------------------------------------------------------
-INSTALL.md                            7.9 KB  e15d6eba36fcda788c7fa0490dcd05d6091a479d6d6b5a18972ca15662597952
-slx-tools-claude.zip              54414.0 KB  a139bfc088bf8df048541c88333368025e9c0991c648d321b5c97ca8b40caaa5
+INSTALL.md                            7.9 KB  c2bbe5f5e4278088382c799ce2b3d59a2bf083633357b1997b255458be63ac1a
+slx-tools-claude.zip              54861.5 KB  cd624415dae47ce8eb6e58c14ad1334811c4ba179415f9aedbaec34ae547bcef

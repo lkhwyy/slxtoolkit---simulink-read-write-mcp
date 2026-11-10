@@ -37,20 +37,20 @@ slxtoolkit turns `.slx` into something an agent can read and write. You ask in p
 | Tool | Purpose |
 |---|---|
 | `slx_info` | Overview: MATLAB release, block counts, root I/O, and warnings for masks, library links and model references |
-| `slx_read` | Structure: blocks, wiring, **a derived expression for what each block computes**, Stateflow states/transitions/data, plus optional full parameters and geometry |
+| `slx_read` | Structure: blocks, wiring, **a derived expression for what each block computes**, Stateflow states/transitions/data, plus optional full parameters and geometry; with geometry, each level gets a **geometry self-check** (diagonal lines, lines through blocks, overlapping blocks, transitions through states, etc.); State Transition Table blocks are read as charts |
 | `slx_params` | **Effective** parameter values, each tagged with its source: explicit, default-filled or derived |
-| `slx_diff` | **Semantic diff** of two models: reports only behaviour-relevant changes and filters out position and version-stamp noise |
+| `slx_diff` | **Semantic diff** of two models: reports only behaviour-relevant changes and filters out position and version-stamp noise; model settings and each configuration set are compared separately |
 | `slx_scan` | Regex search across every text part of the model package, with each hit mapped to its block |
 | `slx_view` | Builds a **single-file interactive HTML view**: hierarchy, geometry, parameters and Stateflow, viewable in any browser |
 | `slx_dump` | Writes the full, untruncated read-out to a file |
 
-### slxwrite: build and edit models (always writes a new file)
+### slxwrite: build and edit models
 
 | Tool | Purpose |
 |---|---|
-| `slx_build` | **Build a new model** or **patch an existing one** from a JSON spec: add/remove blocks and lines, set parameters, subsystems, Stateflow (states, transitions, junctions, truth tables, MATLAB functions), masks, annotations, signal names… |
+| `slx_build` | **Build a new model** or **patch an existing one** from a JSON spec: add/remove blocks and lines, set parameters, move and resize blocks, subsystems, Stateflow (states, transitions, junctions, truth tables, MATLAB functions), masks, annotations, signal names…; supports **step-by-step builds** (split the spec into steps and run up to a chosen one) and **validate-only runs** that write nothing; common mistakes such as out-of-range port numbers or overlapping states are rejected on the spot; after writing, a self-check reports only the geometry problems this run introduced (diagonal lines, lines through blocks, overlapping blocks, etc.) |
 | `slx_layout_report` | Read-only check: line straightness ratio and how many lines could be straightened |
-| `slx_relayout` | Automatically straightens the lines that can be straightened |
+| `slx_relayout` | Automatically straightens the lines that can be straightened without routing lines through blocks when it moves them; reports any geometry problems the output introduced |
 | `slx_describe` | Writes block descriptions in bulk |
 | `slx_capture_layout` / `slx_apply_layout` | Transplants the layout of one model onto another |
 
@@ -221,12 +221,12 @@ The four packages contain identically named folders, so **only the zip file name
 - The plugin works on the **`.slx` file on disk**. After editing in MATLAB, run `save_system` before asking the agent to read it.
 - Compile-time information (propagated data types, dimensions, sample times) and workspace variable values aren't stored in the file. Use MATLAB for those.
 - `.sldd` data dictionaries and configuration sets are left to MATLAB.
-- slxwrite always writes a **new file** and never edits in place. ⚠️ Don't use slxwrite on a model that's open in MATLAB: saving it in MATLAB afterwards silently overwrites the patch.
+- slxwrite writes its result to the output file you name; if that file already exists it refuses, unless you explicitly pass `overwrite=true` to `slx_build`. ⚠️ Don't use slxwrite on a model that's open in MATLAB: saving it in MATLAB afterwards silently overwrites the patch.
 - Open, update and save generated models in MATLAB before treating them as final.
 
 ## Version & validity
 
-Current version **1.2.6**, built 2026-11-02, **valid until 2027-01-02**. After that date the plugin stops working and uninstalls itself once you quit your AI tool (see section 8 of your platform's install guide, `INSTALL-<platform>.md`). New builds are published under [Releases](https://github.com/lkhwyy/slxtoolkit---simulink-read-write-mcp/releases).
+Current version **1.2.21**, built 2026-11-10, **valid until 2027-01-10**. After that date the plugin stops working and uninstalls itself once you quit your AI tool (see section 8 of your platform's install guide, `INSTALL-<platform>.md`). New builds are published under [Releases](https://github.com/lkhwyy/slxtoolkit---simulink-read-write-mcp/releases).
 
 ## Feedback
 
